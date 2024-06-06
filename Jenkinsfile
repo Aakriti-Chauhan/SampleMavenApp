@@ -1,30 +1,35 @@
 pipeline {
     agent any
+
     tools {
-        jdk 'JDK17' // Ensure this matches the name configured in Jenkins
-        maven 'Maven' // Ensure this matches the name configured in Jenkins
+        maven 'Maven' // Ensure this matches the name configured in Global Tool Configuration
+        jdk 'JDK17' // Ensure this matches the name configured in Global Tool Configuration
     }
+
     stages {
         stage('Checkout') {
             steps {
-                // Correctly formatted checkout step
                 git branch: 'main', url: 'https://github.com/Aakriti-Chauhan/SampleMavenApp.git'
             }
         }
+
         stage('Build') {
             steps {
-                // Build steps
                 sh 'mvn clean install'
             }
         }
+
         stage('Test') {
             steps {
-                // Test steps
                 sh 'mvn test'
             }
         }
     }
+
     post {
+        success {
+            echo 'Build and Test succeeded!'
+        }
         failure {
             echo 'Build or Test failed.'
         }
