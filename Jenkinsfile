@@ -1,37 +1,24 @@
 pipeline {
-    agent any
-
-    tools {
-        maven 'Maven' // Ensure this matches the name configured in Global Tool Configuration
-        jdk 'JDK17' // Ensure this matches the name configured in Global Tool Configuration
-    }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Aakriti-Chauhan/SampleMavenApp.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and Test succeeded!'
-        }
-        failure {
-            echo 'Build or Test failed.'
-        }
-    }
+	agent any
+ 
+	stages {
+ 
+		stage('Build'){
+			steps {
+				echo "Build App"
+			}
+		}
+ 
+		stage('Test'){
+			steps{
+				echo "Test App"
+			}
+		}
+ 
+		stage('Deploy') {
+			steps {
+			    echo "Deploy App"
+			}
+		}
+	}
 }
