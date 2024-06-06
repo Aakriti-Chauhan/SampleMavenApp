@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+			checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                 git 'https://github.com/Aakriti-Chauhan/SampleMavenApp.git'
             }
         }
